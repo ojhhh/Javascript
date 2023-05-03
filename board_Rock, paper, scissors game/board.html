@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판</title>
+    <style>
+      .board-content {
+        display: flex;
+      }
+      .board-content div {
+        border: 1px solid;
+        width: auto;
+        min-width: 100px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .board-content input {
+        border: 1px solid;
+        width: auto;
+        min-width: 100px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="text" />
+      <input type="text" />
+      <button id="addBtn">등록</button>
+    </div>
+    <div class="board"></div>
+  </body>
+  <script>
+    // board의 내용을 담아 놓을 배열
+    let boardArr = [];
+    let _index = 1;
+
+    // board의 내용을 만들어줄 생성자
+    // 객체에서 구조분해할당으로 값을 가져옴
+    // 매개변수 부분에 중괄호 작성
+    // 객체에서 가져올 키값을 작성
+    function createBoard({ _name, _content, _id }) {
+      this.name = _name;
+      this.content = _content;
+      this.id = _id;
+    }
+
+    function addBoard() {
+      // 배열 구조분해할당 시 순서대로 할당
+      let [input01, input02] = document.querySelectorAll("input");
+
+      // 구조분해할당으로 할당
+      let board = new createBoard({
+        _name: input01.value,
+        _content: input02.value,
+        _id: _index,
+      });
+      _index++;
+      boardArr.push(board);
+      render();
+    }
+
+    function render() {
+      // 내용 초기화
+      document.querySelector(".board").innerHTML = "";
+      boardArr.forEach(function (item, index) {
+        // 객체가 순서대로 할당
+        let div01 = document.createElement("div");
+        let div02 = document.createElement("div");
+        let input01 = document.createElement("input");
+        let input02 = document.createElement("input");
+        let div03 = document.createElement("div");
+        let div04 = document.createElement("div");
+        let button = document.createElement("button");
+        let upbtn = document.createElement("button");
+        let upbtn2 = document.createElement("button");
+
+        button.onclick = function () {
+          // div01 태그 제거
+          div01.remove();
+          boardArr.splice(index, 1);
+          render();
+        };
+
+        upbtn.onclick = function () {
+          input01.value = item.name;
+          input02.value = item.content;
+          div02.value = item.id;
+
+          upbtn2.innerHTML = "완료";
+
+          div01.append(div02, input01, input02, button, upbtn2);
+
+          document.querySelector(".board").append(div01);
+        };
+
+        upbtn2.onclick = function () {
+          let inputs = document.querySelectorAll("input");
+
+          item.name = inputs[2].value;
+          item.content = inputs[3].value;
+          document.querySelector(".board").value = "";
+          render();
+        };
+
+        button.innerHTML = "삭제";
+        upbtn.innerHTML = "수정";
+        let { name, content, id } = item;
+        div02.innerHTML = id;
+        div03.innerHTML = name;
+        div04.innerHTML = content;
+        div01.className = "board-content";
+
+        div01.append(div02, div03, div04, button, upbtn);
+
+        document.querySelector(".board").append(div01);
+      });
+    }
+
+    addBtn.onclick = addBoard;
+
+    // 수정하기 버튼 만들기
+  </script>
+</html>

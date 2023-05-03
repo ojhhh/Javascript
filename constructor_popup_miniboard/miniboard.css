@@ -1,0 +1,12 @@
+/* button start */
+.frame .btn {
+  width: 100px;
+  height: 20px;
+  border: 1px solid;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* button end */

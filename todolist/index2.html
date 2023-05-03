@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        position: relative;
+        width: 100%;
+        height: 1000px;
+        overflow: hidden;
+      }
+
+      .boxContent {
+        position: absolute;
+        left: 100%;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background-color: aqua;
+        transition: 1s;
+      }
+
+      .is-active {
+        left: 0;
+        opacity: 1;
+      }
+
+      .bigBox {
+        height: 100vh;
+        width: 100%;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="boxContent"></div>
+    </div>
+    <div class="box">
+      <div class="boxContent"></div>
+    </div>
+    <div class="box">
+      <div class="boxContent"></div>
+    </div>
+    <div class="box">
+      <div class="boxContent"></div>
+    </div>
+  </body>
+  <script src="./index2.js"></script>
+</html>
